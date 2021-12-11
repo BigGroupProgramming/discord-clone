@@ -8,16 +8,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-type User struct {
-	gorm.Model
-	Name  string
-	Password string
-}
-
-func (User) TableName() string {
-	scheme := "public"
-	return fmt.Sprintf("%v.user", scheme)
-}
 type Server struct {
 	DB *gorm.DB
 }

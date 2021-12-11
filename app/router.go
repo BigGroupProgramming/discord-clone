@@ -1,6 +1,7 @@
 package app
 
 import (
+	"github.com/BigGroupProgramming/discord-clone/app/handlers/user"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,15 +13,8 @@ func Router(s Server) (*gin.Engine, error){
 		})
 	})
 
+	//main -> init -> router -> handlers -> service -> repos
 
-	r.GET("/users", func(c *gin.Context) {
-		var u User
-		s.DB.First(&u, 1)
-		//tx := db.First(&u, 1)
-		//if tx.Error != nil {
-		//	return Server{}, fmt.Errorf("error finding user | %v", err)
-		//}
-		c.JSON(200, gin.H{"message": u})
-	})
+	r.GET("/users", user.GetUser(s.DB))
 	return r, nil
 }
